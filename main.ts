@@ -1,17 +1,21 @@
-// A working gta6-cover-art-01 entry (Node 22, standard library only): the app is this directory's app/ folder, plain
-// static files a desktop browser loads offline (app/index.html and its ES modules, no library and no network
-// request), and the program hands it in. It copies app/ and screenshots/ from beside this file to /output and writes
-// /output/dossier.json, the summary the judge reads, with the vendored make.fun library. Only the plumbing, not the
-// cover art the bounty asks for: Cover Snap, a plain one-photo square cover with a sunset tint and a bold caption,
-// exported as a 1080 x 1080 PNG. Its two sample photos (app/samples/) were made for make.fun with an image model and
-// are free to use. Build your own GTA-style cover maker in its place, put your 3 or 4 PNG or JPEG screenshots in
-// screenshots/ (the first by name is the cover) and run it.
+// Palmline, a gta6-cover-art-01 entry (Node 22, standard library only): the app is
+// this directory's app/ folder, plain static files a desktop browser loads offline
+// (app/index.html and its ES modules, no library and no network request), and the
+// program hands it in. It copies app/ and screenshots/ from beside this file to
+// /output and writes /output/dossier.json, the summary the judge reads, with the
+// vendored make.fun library. The app is a multi-panel Vice City poster studio:
+// three slanted photo panels with per-panel crop and role labels, a striped
+// sunset, palms and a skyline drawn on canvas, a huge gradient title and a
+// billing block, exported as a PNG in 1080 x 1080, 1080 x 1350 or 1920 x 1080.
+// Its two sample photos (app/samples/) were made for make.fun with an image model
+// and are free to use. Put your 3 or 4 PNG or JPEG screenshots in screenshots/
+// (the first by name is the cover) and run it.
 //
 // Serve it locally with `node serve.ts`, then open http://localhost:8080.
 // Outside the grader's container, MAKEFUN_OUTPUT_DIR stands in for /output:
 //   mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
 
-import { cpSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, readdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildDossier } from './vendor/makefun-app.ts';
@@ -23,6 +27,15 @@ mkdirSync(out, { recursive: true });
 cpSync(join(here, 'app'), join(out, 'app'), { recursive: true });
 mkdirSync(join(out, 'screenshots'), { recursive: true });
 if (existsSync(join(here, 'screenshots'))) cpSync(join(here, 'screenshots'), join(out, 'screenshots'), { recursive: true });
+
+// Palmline hands in four screenshots (wide cover, editor, square, tall): refuse
+// to write a dossier for an entry outside the gate's 3-to-4 screenshot count.
+const shotFiles = existsSync(join(here, 'screenshots'))
+  ? readdirSync(join(here, 'screenshots')).filter((f) => !f.startsWith('.'))
+  : [];
+if (shotFiles.length < 3 || shotFiles.length > 4) {
+  throw new Error(`expected 3-4 screenshots, found ${shotFiles.length}`);
+}
 
 // The scorer's own caps (reference/gate.json): only text_max_bytes shapes the bytes; the others refuse an entry the
 // scorer would refuse (more than 4 screenshots or one over 256 KiB; more than 993 files in app/ or 48 MiB of app
