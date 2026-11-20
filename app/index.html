@@ -3,20 +3,84 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cover Snap</title>
+<title>Palmline — GTA-style Cover Art Studio</title>
 <link rel="stylesheet" href="./style.css">
 </head>
 <body>
+<header class="topbar">
+  <h1>Palmline</h1>
+  <p>Turn your photos into a Vice City sunset poster — three slanted panels, a huge title, one PNG to share.</p>
+</header>
 <main class="app">
-  <section class="controls">
-    <h1>Cover Snap</h1>
-    <p>A photo and a caption, made into a square cover.</p>
-    <label>Photo <input id="photo" type="file" accept="image/*"></label>
-    <label>Caption <input id="caption" type="text" maxlength="40" value="Sunset Heist"></label>
-    <button id="export" type="button">Export PNG 1080 x 1080</button>
+  <section class="controls" aria-label="Poster controls">
+    <label>Title
+      <input id="title" type="text" maxlength="24" value="PALMLINE">
+    </label>
+    <label>Subtitle
+      <input id="subtitle" type="text" maxlength="40" value="A SUNSET HEIST">
+    </label>
+    <fieldset>
+      <legend>Colour grade</legend>
+      <label class="choice"><input type="radio" name="grade" value="sunset" checked> Sunset</label>
+      <label class="choice"><input type="radio" name="grade" value="neon"> Neon Nights</label>
+      <label class="choice"><input type="radio" name="grade" value="midnight"> Midnight</label>
+    </fieldset>
+    <label>Post size
+      <select id="size">
+        <option value="1080x1080">Square — 1080 × 1080</option>
+        <option value="1080x1350">Portrait — 1080 × 1350</option>
+        <option value="1920x1080">Wide — 1920 × 1080</option>
+      </select>
+    </label>
+    <fieldset class="panel">
+      <legend>Panel 1 — left</legend>
+      <label>Photo <input id="panel0-photo" type="file" accept="image/*"></label>
+      <label>Sample
+        <select id="panel0-sample">
+          <option value="pier" selected>Pier at dusk</option>
+          <option value="boulevard">Boulevard</option>
+        </select>
+      </label>
+      <label>Zoom <input id="panel0-zoom" type="range" min="1" max="2.5" step="0.05" value="1.15"></label>
+      <label>Pan left–right <input id="panel0-panx" type="range" min="-0.4" max="0.4" step="0.02" value="0"></label>
+      <label>Pan up–down <input id="panel0-pany" type="range" min="-0.4" max="0.4" step="0.02" value="0"></label>
+      <label>Role <input id="panel0-role" type="text" maxlength="18" value="THE DRIVER"></label>
+    </fieldset>
+    <fieldset class="panel">
+      <legend>Panel 2 — centre</legend>
+      <label>Photo <input id="panel1-photo" type="file" accept="image/*"></label>
+      <label>Sample
+        <select id="panel1-sample">
+          <option value="pier">Pier at dusk</option>
+          <option value="boulevard" selected>Boulevard</option>
+        </select>
+      </label>
+      <label>Zoom <input id="panel1-zoom" type="range" min="1" max="2.5" step="0.05" value="1.1"></label>
+      <label>Pan left–right <input id="panel1-panx" type="range" min="-0.4" max="0.4" step="0.02" value="0"></label>
+      <label>Pan up–down <input id="panel1-pany" type="range" min="-0.4" max="0.4" step="0.02" value="0"></label>
+      <label>Role <input id="panel1-role" type="text" maxlength="18" value="THE QUEEN"></label>
+    </fieldset>
+    <fieldset class="panel">
+      <legend>Panel 3 — right</legend>
+      <label>Photo <input id="panel2-photo" type="file" accept="image/*"></label>
+      <label>Sample
+        <select id="panel2-sample">
+          <option value="pier" selected>Pier at dusk</option>
+          <option value="boulevard">Boulevard</option>
+        </select>
+      </label>
+      <label>Zoom <input id="panel2-zoom" type="range" min="1" max="2.5" step="0.05" value="1.25"></label>
+      <label>Pan left–right <input id="panel2-panx" type="range" min="-0.4" max="0.4" step="0.02" value="0"></label>
+      <label>Pan up–down <input id="panel2-pany" type="range" min="-0.4" max="0.4" step="0.02" value="0"></label>
+      <label>Role <input id="panel2-role" type="text" maxlength="18" value="THE FIXER"></label>
+    </fieldset>
+    <button id="export" type="button">Export PNG</button>
     <p id="status" role="status"></p>
   </section>
-  <canvas id="cover" width="1080" height="1080" aria-label="The cover"></canvas>
+  <section class="preview" aria-label="Live poster preview">
+    <canvas id="cover" width="1080" height="1080" aria-label="The poster preview"></canvas>
+    <p class="hint">Live preview — every change redraws the poster at once. Photos stay on your machine; nothing is uploaded.</p>
+  </section>
 </main>
 <script type="module" src="./src/main.js"></script>
 </body>
