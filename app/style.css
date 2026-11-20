@@ -1,12 +1,39 @@
-html, body { margin: 0; height: 100%; background: #f2f0f4; color: #1d1b22; font: 15px/1.4 system-ui, sans-serif; }
-.app { display: flex; gap: 32px; align-items: center; justify-content: center; height: 100%; padding: 24px; box-sizing: border-box; }
-.controls { display: flex; flex-direction: column; gap: 14px; width: 280px; }
-.controls h1 { margin: 0; font-size: 28px; }
-.controls p { margin: 0; color: #5c5866; }
+/* Palmline studio: a dark editor beside a live poster preview. */
+html, body { margin: 0; min-height: 100%; background: #12081f; color: #f4eefc; font: 15px/1.45 system-ui, sans-serif; }
+.topbar { padding: 18px 28px 4px; }
+.topbar h1 {
+  margin: 0; font-size: 34px; font-style: italic; font-weight: 900; letter-spacing: 0.04em;
+  background: linear-gradient(90deg, #ffffff, #ffe27a 55%, #ff7ab8);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.topbar p { margin: 4px 0 0; color: #b9a8d6; }
+.app { display: flex; gap: 28px; align-items: flex-start; padding: 18px 28px 28px; box-sizing: border-box; }
+.controls { display: flex; flex-direction: column; gap: 14px; width: 300px; flex: none; }
+.controls fieldset { border: 1px solid #3d2a5e; border-radius: 10px; padding: 12px; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.controls legend { font-weight: 700; padding: 0 6px; color: #ffd76b; }
+.controls .choice { flex-direction: row; align-items: center; }
 label { display: flex; flex-direction: column; gap: 6px; font-weight: 600; }
-input[type=text] { font: inherit; padding: 8px; border: 1px solid #c9c4d1; border-radius: 6px; }
-button { font: inherit; font-weight: 700; padding: 10px; border: 0; border-radius: 6px; background: #1d1b22; color: #fff; cursor: pointer; }
-canvas { width: min(70vh, 60vw); height: min(70vh, 60vw); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); }
-body.shot-cover .controls { display: none; }
-body.shot-cover .app { padding: 0; }
-body.shot-cover canvas { width: 100vw; height: 100vh; box-shadow: none; }
+input[type=text], select {
+  font: inherit; padding: 8px; border: 1px solid #4a3670; border-radius: 6px;
+  background: #1d1032; color: #f4eefc;
+}
+input[type=range] { width: 100%; accent-color: #ff5e62; }
+button {
+  font: inherit; font-weight: 800; padding: 12px; border: 0; border-radius: 8px; cursor: pointer;
+  background: linear-gradient(90deg, #ff5e62, #ff7ab8); color: #fff;
+}
+button:hover { filter: brightness(1.12); }
+#status { margin: 0; color: #9be8c9; min-height: 1.2em; }
+.preview { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.preview canvas {
+  max-width: 100%; max-height: calc(100vh - 190px); width: auto; height: auto;
+  box-shadow: 0 12px 44px rgba(0, 0, 0, 0.55); border-radius: 4px;
+}
+.hint { margin: 0; color: #b9a8d6; font-size: 13px; text-align: center; }
+
+/* Screenshot mode: the cover alone, edge to edge. */
+body.shot-cover .topbar, body.shot-cover .controls, body.shot-cover .hint { display: none; }
+body.shot-cover { background: #160b33; }
+body.shot-cover .app { padding: 0; display: block; }
+body.shot-cover .preview { display: block; }
+body.shot-cover canvas { max-height: none; width: 100vw; height: 100vh; object-fit: contain; box-shadow: none; border-radius: 0; }
