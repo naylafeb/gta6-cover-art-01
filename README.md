@@ -2,13 +2,15 @@
 [![rank](https://make.fun/badge/gta6-cover-art-01/naylafeb/gta6-cover-art-01/rank.svg)](https://make.fun/bounty/gta6-cover-art-01)
 [![reward](https://make.fun/badge/gta6-cover-art-01/naylafeb/gta6-cover-art-01/reward.svg)](https://make.fun/bounty/gta6-cover-art-01)
 
-# Palmline — GTA-style Cover Art Studio
+# Ocean Drive — GTA-style Cover Art Studio
 
-Turn your photos into a Vice City sunset poster: three slanted photo panels,
-each with its own crop and role label, under a huge gradient title and a
-billing block. Pick a colour grade (Sunset, Neon Nights, Midnight), choose a
-post size (1080 × 1080, 1080 × 1350 or 1920 × 1080), and export the cover as
-a PNG to share.
+Turn your photos into a Vice City poster: a pop-out hero photo with focal
+detection (the crop centres on whatever draws the eye — no library, no
+network), a striped retro-chrome 3D title sitting over the art, five layouts,
+eight colour grades, callouts, a seal stamp and auto cast tags, with a billing
+block. Pick a post size (1080 × 1080, 1080 × 1350 or 1920 × 1080) and export
+the cover as a PNG to share. Click the preview to focus the hero where you
+clicked.
 
 Everything runs offline from static files: photos are read on your own
 machine and never uploaded, and every image, font and script the app loads is
@@ -29,3 +31,5 @@ Then open http://localhost:8080 in a desktop browser.
 ```sh
 mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
 ```
+
+This rebuilds `out/` with the app, the screenshots and `dossier.json`.
