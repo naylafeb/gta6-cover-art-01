@@ -1,12 +1,12 @@
-// Palmline, a gta6-cover-art-01 entry (Node 22, standard library only): the app is
+// Ocean Drive, a gta6-cover-art-01 entry (Node 22, standard library only): the app is
 // this directory's app/ folder, plain static files a desktop browser loads offline
 // (app/index.html and its ES modules, no library and no network request), and the
 // program hands it in. It copies app/ and screenshots/ from beside this file to
 // /output and writes /output/dossier.json, the summary the judge reads, with the
-// vendored make.fun library. The app is a multi-panel Vice City poster studio:
-// three slanted photo panels with per-panel crop and role labels, a striped
-// sunset, palms and a skyline drawn on canvas, a huge gradient title and a
-// billing block, exported as a PNG in 1080 x 1080, 1080 x 1350 or 1920 x 1080.
+// vendored make.fun library. The app is a Vice City poster studio built around a
+// pop-out hero photo with on-device focal detection, a striped retro-chrome 3D
+// title over the art, five layouts, eight colour grades, callouts, a seal stamp
+// and auto cast tags, exported as a PNG in 1080 x 1080, 1080 x 1350 or 1920 x 1080.
 // Its two sample photos (app/samples/) were made for make.fun with an image model
 // and are free to use. Put your 3 or 4 PNG or JPEG screenshots in screenshots/
 // (the first by name is the cover) and run it.
@@ -28,8 +28,9 @@ cpSync(join(here, 'app'), join(out, 'app'), { recursive: true });
 mkdirSync(join(out, 'screenshots'), { recursive: true });
 if (existsSync(join(here, 'screenshots'))) cpSync(join(here, 'screenshots'), join(out, 'screenshots'), { recursive: true });
 
-// Palmline hands in four screenshots (wide cover, editor, square, tall): refuse
-// to write a dossier for an entry outside the gate's 3-to-4 screenshot count.
+// Ocean Drive hands in four screenshots (wide hero cover, editor, square
+// billboard cover, tall slanted cover): refuse to write a dossier for an
+// entry outside the gate's 3-to-4 screenshot count.
 const shotFiles = existsSync(join(here, 'screenshots'))
   ? readdirSync(join(here, 'screenshots')).filter((f) => !f.startsWith('.'))
   : [];
