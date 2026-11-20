@@ -3,27 +3,44 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Palmline — GTA-style Cover Art Studio</title>
+<title>Ocean Drive — GTA-style Cover Art Studio</title>
 <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 <header class="topbar">
-  <h1>Palmline</h1>
-  <p>Turn your photos into a Vice City sunset poster — three slanted panels, a huge title, one PNG to share.</p>
+  <h1>Ocean Drive</h1>
+  <p>Turn your photos into a Vice City poster — a pop-out hero, chrome title over the art, five layouts, eight grades, one PNG to share.</p>
 </header>
 <main class="app">
   <section class="controls" aria-label="Poster controls">
     <label>Title
-      <input id="title" type="text" maxlength="24" value="PALMLINE">
+      <input id="title" type="text" maxlength="24" value="OCEAN DRIVE">
     </label>
     <label>Subtitle
-      <input id="subtitle" type="text" maxlength="40" value="A SUNSET HEIST">
+      <input id="subtitle" type="text" maxlength="40" value="WELCOME TO LEONIDA">
+    </label>
+    <label>Caption line
+      <input id="caption" type="text" maxlength="48" value="A NEON HEIST IN VICE CITY">
+    </label>
+    <label>Layout
+      <select id="layout">
+        <option value="hero" selected>Hero pop-out — big hero, three stacked</option>
+        <option value="slant">Slanted four — alternating tilts</option>
+        <option value="billboard">Billboard — hero band, three below</option>
+        <option value="duo">Duo — two tall, two wide</option>
+        <option value="mosaic">Mosaic — hero quartered</option>
+      </select>
     </label>
     <fieldset>
       <legend>Colour grade</legend>
       <label class="choice"><input type="radio" name="grade" value="sunset" checked> Sunset</label>
       <label class="choice"><input type="radio" name="grade" value="neon"> Neon Nights</label>
       <label class="choice"><input type="radio" name="grade" value="midnight"> Midnight</label>
+      <label class="choice"><input type="radio" name="grade" value="vicegold"> Vice Gold</label>
+      <label class="choice"><input type="radio" name="grade" value="heatwave"> Heatwave</label>
+      <label class="choice"><input type="radio" name="grade" value="palmteal"> Palm Teal</label>
+      <label class="choice"><input type="radio" name="grade" value="cotton"> Cotton Candy</label>
+      <label class="choice"><input type="radio" name="grade" value="noir"> Noir</label>
     </fieldset>
     <label>Post size
       <select id="size">
@@ -32,47 +49,91 @@
         <option value="1920x1080">Wide — 1920 × 1080</option>
       </select>
     </label>
-    <fieldset class="panel">
-      <legend>Panel 1 — left</legend>
-      <label>Photo <input id="panel0-photo" type="file" accept="image/*"></label>
+    <label class="choice"><input id="seal" type="checkbox" checked> Seal stamp on the cover</label>
+    <fieldset>
+      <legend>Callouts</legend>
+      <label>Callout 1
+        <input id="callout0" type="text" maxlength="26" value="WANTED: ONE LAST JOB">
+      </label>
+      <label class="choice"><input id="callout0-on" type="checkbox" checked> Show callout 1</label>
+      <label>Callout 2
+        <input id="callout1" type="text" maxlength="26" value="NEW IN LEONIDA">
+      </label>
+      <label class="choice"><input id="callout1-on" type="checkbox" checked> Show callout 2</label>
+    </fieldset>
+    <button id="autocast" type="button">Auto cast — next cast set</button>
+    <fieldset class="slot">
+      <legend>Slot 1 — hero (pop-out)</legend>
+      <label>Photo <input id="slot0-photo" type="file" accept="image/*"></label>
       <label>Sample
-        <select id="panel0-sample">
+        <select id="slot0-sample">
           <option value="pier" selected>Pier at dusk</option>
           <option value="boulevard">Boulevard</option>
         </select>
       </label>
-      <label>Zoom <input id="panel0-zoom" type="range" min="1" max="2.5" step="0.05" value="1.15"></label>
-      <label>Pan left–right <input id="panel0-panx" type="range" min="-0.4" max="0.4" step="0.02" value="0"></label>
-      <label>Pan up–down <input id="panel0-pany" type="range" min="-0.4" max="0.4" step="0.02" value="0"></label>
-      <label>Role <input id="panel0-role" type="text" maxlength="18" value="THE DRIVER"></label>
+      <label>Zoom <input id="slot0-zoom" type="range" min="1" max="2.5" step="0.05" value="1.2"></label>
+      <label>Pan left–right <input id="slot0-panx" type="range" min="-0.4" max="0.4" step="0.02" value="0"></label>
+      <label>Pan up–down <input id="slot0-pany" type="range" min="-0.4" max="0.4" step="0.02" value="0"></label>
+      <label>Role <input id="slot0-role" type="text" maxlength="18" value="THE DRIVER"></label>
+      <span class="focus-row">
+        <button id="slot0-focus-auto" type="button">Focus: auto</button>
+        <button id="slot0-focus-centre" type="button">Focus: centre</button>
+      </span>
+      <p class="micro">Or click the preview to focus the hero where you clicked.</p>
     </fieldset>
-    <fieldset class="panel">
-      <legend>Panel 2 — centre</legend>
-      <label>Photo <input id="panel1-photo" type="file" accept="image/*"></label>
+    <fieldset class="slot">
+      <legend>Slot 2</legend>
+      <label>Photo <input id="slot1-photo" type="file" accept="image/*"></label>
       <label>Sample
-        <select id="panel1-sample">
+        <select id="slot1-sample">
           <option value="pier">Pier at dusk</option>
           <option value="boulevard" selected>Boulevard</option>
         </select>
       </label>
-      <label>Zoom <input id="panel1-zoom" type="range" min="1" max="2.5" step="0.05" value="1.1"></label>
-      <label>Pan left–right <input id="panel1-panx" type="range" min="-0.4" max="0.4" step="0.02" value="0"></label>
-      <label>Pan up–down <input id="panel1-pany" type="range" min="-0.4" max="0.4" step="0.02" value="0"></label>
-      <label>Role <input id="panel1-role" type="text" maxlength="18" value="THE QUEEN"></label>
+      <label>Zoom <input id="slot1-zoom" type="range" min="1" max="2.5" step="0.05" value="1.1"></label>
+      <label>Pan left–right <input id="slot1-panx" type="range" min="-0.4" max="0.4" step="0.02" value="0"></label>
+      <label>Pan up–down <input id="slot1-pany" type="range" min="-0.4" max="0.4" step="0.02" value="0"></label>
+      <label>Role <input id="slot1-role" type="text" maxlength="18" value="THE QUEEN"></label>
+      <span class="focus-row">
+        <button id="slot1-focus-auto" type="button">Focus: auto</button>
+        <button id="slot1-focus-centre" type="button">Focus: centre</button>
+      </span>
     </fieldset>
-    <fieldset class="panel">
-      <legend>Panel 3 — right</legend>
-      <label>Photo <input id="panel2-photo" type="file" accept="image/*"></label>
+    <fieldset class="slot">
+      <legend>Slot 3</legend>
+      <label>Photo <input id="slot2-photo" type="file" accept="image/*"></label>
       <label>Sample
-        <select id="panel2-sample">
+        <select id="slot2-sample">
           <option value="pier" selected>Pier at dusk</option>
           <option value="boulevard">Boulevard</option>
         </select>
       </label>
-      <label>Zoom <input id="panel2-zoom" type="range" min="1" max="2.5" step="0.05" value="1.25"></label>
-      <label>Pan left–right <input id="panel2-panx" type="range" min="-0.4" max="0.4" step="0.02" value="0"></label>
-      <label>Pan up–down <input id="panel2-pany" type="range" min="-0.4" max="0.4" step="0.02" value="0"></label>
-      <label>Role <input id="panel2-role" type="text" maxlength="18" value="THE FIXER"></label>
+      <label>Zoom <input id="slot2-zoom" type="range" min="1" max="2.5" step="0.05" value="1.15"></label>
+      <label>Pan left–right <input id="slot2-panx" type="range" min="-0.4" max="0.4" step="0.02" value="0"></label>
+      <label>Pan up–down <input id="slot2-pany" type="range" min="-0.4" max="0.4" step="0.02" value="0"></label>
+      <label>Role <input id="slot2-role" type="text" maxlength="18" value="THE FIXER"></label>
+      <span class="focus-row">
+        <button id="slot2-focus-auto" type="button">Focus: auto</button>
+        <button id="slot2-focus-centre" type="button">Focus: centre</button>
+      </span>
+    </fieldset>
+    <fieldset class="slot">
+      <legend>Slot 4</legend>
+      <label>Photo <input id="slot3-photo" type="file" accept="image/*"></label>
+      <label>Sample
+        <select id="slot3-sample">
+          <option value="pier">Pier at dusk</option>
+          <option value="boulevard" selected>Boulevard</option>
+        </select>
+      </label>
+      <label>Zoom <input id="slot3-zoom" type="range" min="1" max="2.5" step="0.05" value="1.2"></label>
+      <label>Pan left–right <input id="slot3-panx" type="range" min="-0.4" max="0.4" step="0.02" value="0"></label>
+      <label>Pan up–down <input id="slot3-pany" type="range" min="-0.4" max="0.4" step="0.02" value="0"></label>
+      <label>Role <input id="slot3-role" type="text" maxlength="18" value="THE GETAWAY"></label>
+      <span class="focus-row">
+        <button id="slot3-focus-auto" type="button">Focus: auto</button>
+        <button id="slot3-focus-centre" type="button">Focus: centre</button>
+      </span>
     </fieldset>
     <button id="export" type="button">Export PNG</button>
     <p id="status" role="status"></p>
