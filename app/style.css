@@ -1,21 +1,21 @@
-/* Palmline studio: a dark editor beside a live poster preview. */
-html, body { margin: 0; min-height: 100%; background: #12081f; color: #f4eefc; font: 15px/1.45 system-ui, sans-serif; }
+/* Ocean Drive studio: a deep-violet editor with gold accents beside the live poster. */
+html, body { margin: 0; min-height: 100%; background: #0d0716; color: #f6f0ff; font: 15px/1.45 system-ui, sans-serif; }
 .topbar { padding: 18px 28px 4px; }
 .topbar h1 {
-  margin: 0; font-size: 34px; font-style: italic; font-weight: 900; letter-spacing: 0.04em;
-  background: linear-gradient(90deg, #ffffff, #ffe27a 55%, #ff7ab8);
+  margin: 0; font-size: 36px; font-style: italic; font-weight: 900; letter-spacing: 0.04em;
+  background: linear-gradient(90deg, #ffffff, #ffd76b 55%, #ff7ab8);
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
-.topbar p { margin: 4px 0 0; color: #b9a8d6; }
+.topbar p { margin: 4px 0 0; color: #b3a3d4; }
 .app { display: flex; gap: 28px; align-items: flex-start; padding: 18px 28px 28px; box-sizing: border-box; }
-.controls { display: flex; flex-direction: column; gap: 14px; width: 300px; flex: none; }
-.controls fieldset { border: 1px solid #3d2a5e; border-radius: 10px; padding: 12px; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.controls { display: flex; flex-direction: column; gap: 14px; width: 310px; flex: none; }
+.controls fieldset { border: 1px solid #43305f; border-radius: 10px; padding: 12px; margin: 0; display: flex; flex-direction: column; gap: 10px; }
 .controls legend { font-weight: 700; padding: 0 6px; color: #ffd76b; }
-.controls .choice { flex-direction: row; align-items: center; }
+.controls .choice { flex-direction: row; align-items: center; gap: 8px; }
 label { display: flex; flex-direction: column; gap: 6px; font-weight: 600; }
 input[type=text], select {
-  font: inherit; padding: 8px; border: 1px solid #4a3670; border-radius: 6px;
-  background: #1d1032; color: #f4eefc;
+  font: inherit; padding: 8px; border: 1px solid #54397e; border-radius: 6px;
+  background: #1e1036; color: #f6f0ff;
 }
 input[type=range] { width: 100%; accent-color: #ff5e62; }
 button {
@@ -23,17 +23,23 @@ button {
   background: linear-gradient(90deg, #ff5e62, #ff7ab8); color: #fff;
 }
 button:hover { filter: brightness(1.12); }
+.focus-row { display: flex; gap: 8px; }
+.focus-row button {
+  flex: 1; padding: 7px 6px; font-size: 13px; font-weight: 700;
+  background: #2a1848; border: 1px solid #54397e; color: #ffd76b;
+}
+.micro { margin: 0; font-size: 12px; font-weight: 400; color: #b3a3d4; }
 #status { margin: 0; color: #9be8c9; min-height: 1.2em; }
 .preview { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 12px; }
 .preview canvas {
   max-width: 100%; max-height: calc(100vh - 190px); width: auto; height: auto;
-  box-shadow: 0 12px 44px rgba(0, 0, 0, 0.55); border-radius: 4px;
+  box-shadow: 0 12px 44px rgba(0, 0, 0, 0.55); border-radius: 4px; cursor: crosshair;
 }
-.hint { margin: 0; color: #b9a8d6; font-size: 13px; text-align: center; }
+.hint { margin: 0; color: #b3a3d4; font-size: 13px; text-align: center; }
 
 /* Screenshot mode: the cover alone, edge to edge. */
 body.shot-cover .topbar, body.shot-cover .controls, body.shot-cover .hint { display: none; }
 body.shot-cover { background: #160b33; }
 body.shot-cover .app { padding: 0; display: block; }
 body.shot-cover .preview { display: block; }
-body.shot-cover canvas { max-height: none; width: 100vw; height: 100vh; object-fit: contain; box-shadow: none; border-radius: 0; }
+body.shot-cover canvas { max-height: none; width: 100vw; height: 100vh; object-fit: contain; box-shadow: none; border-radius: 0; cursor: default; }
